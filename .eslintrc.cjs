@@ -16,5 +16,9 @@ module.exports = {
 		browser: true,
 		es2017: true,
 		node: true
-	}
+	},
+	rules: {
+    'no-unused-vars': 1,
+    'semi': 0
+  },
 };
