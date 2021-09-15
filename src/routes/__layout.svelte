@@ -1,7 +1,10 @@
 <script>
-    import Settings from '../components/Settings.svelte';
+    import Menu from '../components/Menu.svelte';
 </script>
 
+<div>
+    <h1>Memory Box</h1>
+  <Menu />  
+</div>
 
-<Settings />
 <slot />
