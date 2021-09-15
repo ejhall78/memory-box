@@ -1,22 +1,10 @@
 <script>
     console.log('inside Highlights.svelte');
+    import SingleHighlight from "./SingleHighlight.svelte";
 </script>
 
 <div>
-    <div>
-        <h4>Highlight Title...</h4>
-        <p>Highlight body here.....</p>
-    </div>
-    <div>
-        <h4>Highlight Title...</h4>
-        <p>Highlight body here.....</p>
-    </div>
-    <div>
-        <h4>Highlight Title...</h4>
-        <p>Highlight body here.....</p>
-    </div>
-    <div>
-        <h4>Highlight Title...</h4>
-        <p>Highlight body here.....</p>
-    </div>
+    <SingleHighlight />
+    <SingleHighlight />
+    <SingleHighlight />
 </div>
