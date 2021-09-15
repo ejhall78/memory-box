@@ -1,6 +1,9 @@
 <script>
-	export let foo;
+	import DailyQuestion from '../components/DailyQuestion.svelte';
+	import Calendar from '../components/Calendar.svelte';
+	import Highlights from '../components/Highlights.svelte';
 </script>
 
-<h1>Welcome to Memory Box</h1>
-<p>This is a husky test :O</p>
+<DailyQuestion />
+<Calendar />
+<Highlights />
