@@ -2,9 +2,21 @@
     import Menu from '../components/Menu.svelte';
 </script>
 
-<div>
+<div class="header">
     <h1>Memory Box</h1>
   <Menu />  
 </div>
+<div class="body">
+  <slot />
+</div>
 
-<slot />
+
+
+<style>
+  .header {
+    border: 10px solid yellow;
+  }
+  .body {
+    border: 10px solid green;
+  }
+</style>

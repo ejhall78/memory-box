@@ -3,8 +3,14 @@
     import SingleHighlight from "./SingleHighlight.svelte";
 </script>
 
-<div>
+<div class="highlights">
     <SingleHighlight />
     <SingleHighlight />
     <SingleHighlight />
 </div>
+
+<style>
+    .highlights {
+        border: 10px solid purple;
+    }
+</style>

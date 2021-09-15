@@ -3,7 +3,7 @@
 </script>
 
 
-<div>
+<div class="dailyQuestion">
     <h3>Today's Question</h3>
     <label for="DailyQuestion-input">
         <p>What is your favourite colour?</p>
@@ -15,3 +15,10 @@
     <button>remember/forget</button>
     <button>Send</button>
 </div>
+
+
+<style>
+    .dailyQuestion{
+        border: 10px solid pink;
+    }
+</style>

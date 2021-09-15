@@ -1,6 +1,6 @@
 <script> console.log('inside signup')</script>
 
-<div>
+<div class="signUp">
     <h3>Please Sign-Up Here</h3>
     <p>Create account to get started</p>
      <label for="firstName">First Name </label>
@@ -14,3 +14,10 @@
      <button>Create Account</button>
      <p>Already have an account? <a href="/signin" >Click here</a> to sign in!</p>
 </div>
+
+
+<style>
+    .signUp {
+        border: 10px solid purple;
+    }
+</style>
