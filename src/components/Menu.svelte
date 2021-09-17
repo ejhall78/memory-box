@@ -5,6 +5,7 @@
     <a href="/signup">sign up</a>
     <a href="/settings">settings</a>
     <a href="/user">profile</a>
+    <a href="/friendlist">friend list</a>
 </div>
 
 
