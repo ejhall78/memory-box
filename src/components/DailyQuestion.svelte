@@ -1,5 +1,9 @@
 <script>
     console.log('inside DailyQuestion.svelte');
+
+    function test(){
+        console.log("button click successful")
+    }
 </script>
 
 
@@ -12,8 +16,8 @@
         type="text"
         id="DailyQuestion-input"
     />
-    <button>remember/forget</button>
-    <button>Send</button>
+    <button on:click={test}>remember/forget</button>
+    <button on:click={test}>Send</button>
 </div>
 
 
