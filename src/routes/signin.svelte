@@ -30,10 +30,9 @@
     const submitHandler = (values) => {
         signInWithEmailAndPassword(auth, values.email, values.password)
             .then((userCredential) => {
-                // Signed in
                 console.log('successful sign in!')
                 const user = userCredential.user;
-                console.log(user)
+                // console.log(user)
             })
             .catch((error) => {
                 const errorCode = error.code;
