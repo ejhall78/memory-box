@@ -1,5 +1,6 @@
 <script>
     console.log("inside signin");
+    import { goto } from '$app/navigation';
     import { initializeApp } from "@firebase/app";
     import { getFirestore } from "@firebase/firestore/lite";
     const apiKey = import.meta.env.VITE_KEY;
@@ -33,6 +34,7 @@
                 console.log('successful sign in!')
                 const user = userCredential.user;
                 // console.log(user)
+                goto('/user');
             })
             .catch((error) => {
                 const errorCode = error.code;

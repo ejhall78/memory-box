@@ -1,4 +1,5 @@
 <script>
+  import { goto } from '$app/navigation';
     import { initializeApp } from "@firebase/app";
     import { getFirestore } from "@firebase/firestore/lite";
     import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -28,7 +29,10 @@
     const auth = getAuth();
     // console.log(auth);
 
-    export const logout = () => auth.signOut();
+    export const logout = () => {
+        auth.signOut();
+        goto('/signin');
+    };
 
     $: loggedIn = false;
 

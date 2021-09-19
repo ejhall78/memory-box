@@ -1,5 +1,6 @@
 <script>
   console.log("inside signup");
+  import { goto } from '$app/navigation';
   import { initializeApp } from "@firebase/app";
   import { getFirestore } from "@firebase/firestore/lite";
   const apiKey = import.meta.env.VITE_KEY;
@@ -33,11 +34,11 @@
         console.log("account created!");
         const user = userCredential.user;
         // console.log(user)
-        if (values.username) {
           updateProfile(auth.currentUser, {
             displayName: values.username
-          })
-        }
+          }).then(() => {
+            goto('/user');
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
