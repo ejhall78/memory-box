@@ -1,8 +1,8 @@
 <script>
   console.log("inside signup");
-  import { goto } from '$app/navigation';
+  import { goto } from "$app/navigation";
   import { initializeApp } from "@firebase/app";
-  import { getFirestore } from "@firebase/firestore/lite";
+  import { getFirestore, doc, setDoc } from "@firebase/firestore/lite";
   const apiKey = import.meta.env.VITE_KEY;
   const authDomain = import.meta.env.VITE_AUTHDOMAIN;
   const projectId = import.meta.env.VITE_PROJECTID;
@@ -23,7 +23,11 @@
 
   export const app = initializeApp(firebaseConfig);
   export const db = getFirestore(app);
-  import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile,
+  } from "firebase/auth";
 
   const auth = getAuth();
   const values = {};
@@ -31,14 +35,17 @@
   const submitHandler = (values) => {
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
-        console.log("account created!");
-        const user = userCredential.user;
-        // console.log(user)
-          updateProfile(auth.currentUser, {
-            displayName: values.username
-          }).then(() => {
-            goto('/user');
-          });
+        return updateProfile(userCredential.user, {
+          displayName: values.username,
+        });
+      })
+      .then(() => {
+        setDoc(doc(db, 'users', auth.currentUser.uid), {
+          hello: 'world!'
+        });
+      })
+      .then(() => {
+        goto("/user");
       })
       .catch((error) => {
         const errorCode = error.code;
