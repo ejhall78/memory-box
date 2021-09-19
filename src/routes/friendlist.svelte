@@ -8,7 +8,7 @@
 {:then users}
     <ul in:fly="{{ x: 200, duration: 7000 }}" out:fade>
         {#each users as user }
-            <li>{user.first} {user.last}, {user.born}</li>
+            <li>{user.personal_data.first_name} {user.personal_data.last_name} ({user.personal_data.username})</li>
         {/each}
     </ul>
 {:catch error}
