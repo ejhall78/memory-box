@@ -50,6 +50,7 @@
     <div>
         {#if loggedIn}
             <p>Hello {auth.currentUser.email}!</p>
+            <p>Your username is: {auth.currentUser.displayName}</p>
         {:else}
             <p>Who are you...</p>
         {/if}
