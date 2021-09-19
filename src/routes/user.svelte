@@ -1,8 +1,9 @@
 <script>
-  import { goto } from '$app/navigation';
-    import { initializeApp } from "@firebase/app";
-    import { getFirestore } from "@firebase/firestore/lite";
-    import { getAuth, onAuthStateChanged } from "firebase/auth";
+    import { goto } from '$app/navigation';
+    import { initializeApp } from '@firebase/app';
+    import { getFirestore } from '@firebase/firestore/lite';
+    import { getAuth, onAuthStateChanged } from 'firebase/auth';
+    import { getUserInfo } from '../lib/firebase.js';
     const apiKey = import.meta.env.VITE_KEY;
     const authDomain = import.meta.env.VITE_AUTHDOMAIN;
     const projectId = import.meta.env.VITE_PROJECTID;
@@ -57,6 +58,22 @@
             <p>Your username is: {auth.currentUser.displayName}</p>
         {:else}
             <p>Who are you...</p>
+        {/if}
+    </div>
+    <div>
+        {#if loggedIn}
+            <p>Your very own user document contains the following information:</p>
+            {#await getUserInfo(auth.currentUser.uid)}
+                <p>Loading......</p>
+            {:then userInfo}
+                {#if userInfo}
+                    <p>{Object.keys(userInfo)} {Object.values(userInfo)}</p>
+                {:else}
+                    <p>...nothing!</p>
+                {/if}
+            {:catch error}
+                <p>Whoops! Something went wrong: {error.message}</p>
+            {/await}
         {/if}
     </div>
     <div>
