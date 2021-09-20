@@ -1,5 +1,5 @@
 import { initializeApp } from '@firebase/app';
-import { getFirestore, collection, getDocs } from '@firebase/firestore/lite';
+import { getFirestore, collection, getDocs, doc, getDoc } from '@firebase/firestore/lite';
 const apiKey = import.meta.env.VITE_KEY;
 const authDomain = import.meta.env.VITE_AUTHDOMAIN
 const projectId = import.meta.env.VITE_PROJECTID
@@ -34,3 +34,10 @@ export const getUsers = async () => {
   const userList = userSnapshot.docs.map(doc => doc.data());
   return userList;
 }
+
+export const getUserInfo = async (uid) => {
+  const docRef = doc(db, 'users', uid);
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  return docData;
+};

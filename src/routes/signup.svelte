@@ -1,23 +1,106 @@
-<script> console.log('inside signup')</script>
+<script>
+  console.log("inside signup");
+  import { goto } from "$app/navigation";
+  import { initializeApp } from "@firebase/app";
+  import { getFirestore, doc, setDoc } from "@firebase/firestore/lite";
+  const apiKey = import.meta.env.VITE_KEY;
+  const authDomain = import.meta.env.VITE_AUTHDOMAIN;
+  const projectId = import.meta.env.VITE_PROJECTID;
+  const storageBucket = import.meta.env.VITE_STORAGEBUCKET;
+  const messagingSenderId = import.meta.env.VITE_MESSAGINGSENDERID;
+  const appId = import.meta.env.VITE_APPID;
+  const measurementId = import.meta.env.VITE_MEASUREMENTID;
+
+  const firebaseConfig = {
+    apiKey,
+    authDomain,
+    projectId,
+    storageBucket,
+    messagingSenderId,
+    appId,
+    measurementId,
+  };
+
+  export const app = initializeApp(firebaseConfig);
+  export const db = getFirestore(app);
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile,
+  } from "firebase/auth";
+
+  const auth = getAuth();
+  const values = {};
+
+  const submitHandler = (values) => {
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        return updateProfile(userCredential.user, {
+          displayName: values.username,
+        });
+      })
+      .then(() => {
+        setDoc(doc(db, 'users', auth.currentUser.uid), {
+          hello: 'world!'
+        });
+      })
+      .then(() => {
+        goto("/user");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+    console.log("submitted...");
+  };
+
+  // to check fields capture details, use on:keyup with this function
+  // const changeLogger = () => {
+  //   console.log(values);
+  // };
+</script>
 
 <div class="signUp">
-    <h3>Please Sign-Up Here</h3>
-    <p>Create account to get started</p>
-     <label for="firstName">First Name </label>
-     <input id="firstName" type="input">
-     <label for="lastName">Last Name </label>
-     <input id="lasttName" type="input">
-    <label for="emailAddress">Email </label>
-     <input id="emailAddress" type="email">
-     <label for="password">Password </label>
-     <input id="password" type="password">
-     <button>Create Account</button>
-     <p>Already have an account? <a href="/signin" >Click here</a> to sign in!</p>
+  <h3>Create your Memory Box...</h3>
+  <p>Create an account to get started</p>
+  <form on:submit|preventDefault={submitHandler(values)}>
+    <div>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        placeholder="julia@gulia.com"
+        bind:value={values.email}
+      />
+    </div>
+    <div>
+      <label for="username">Username</label>
+      <input
+        id="username"
+        type="text"
+        placeholder="jgulia784"
+        bind:value={values.username}
+      />
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        placeholder="make it strong!"
+        bind:value={values.password}
+      />
+    </div>
+    <div>
+      <button type="submit">Sign Up</button>
+    </div>
+  </form>
+  <p>Already have an account? <a href="/signin">Click here</a> to sign in!</p>
 </div>
 
-
 <style>
-    .signUp {
-        border: 10px solid purple;
-    }
+  .signUp {
+    border: 10px solid purple;
+  }
 </style>
