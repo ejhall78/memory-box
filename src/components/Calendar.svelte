@@ -12,7 +12,8 @@
         border: 10px solid blue;
     }
     img {
-        max-width: 500px;
+        max-width: 100%;
+        min-width: 50%;
         margin: 20px
     }
 </style>
