@@ -12,10 +12,10 @@
 		year: date.getFullYear(),
 	}
 	
-	const monthNames = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+	const monthInfo = [ {num: '01', word: 'January'}, {num: "02", word: 'February'}, {num: "03", word: 'March'}, {num: "04", word: "April"}, {num: "05", word: 'May'}, {num: "06", word: 'June'}, {num: "07", word: 'July'}, {num: "08", word: "August"}, {num: "09", word: 'September'}, {num: "10", word: 'October'}, {num: "11", word: 'November'}, {num: "12", word: 'December'}];
 	let monthIndex = date.getMonth();
 	
-	$: month = monthNames[monthIndex];
+	$: month = monthInfo[monthIndex];
 	
 	let year = date.getFullYear();
 	
@@ -24,8 +24,6 @@
 	$: numberOfDays = new Date(year, monthIndex+1, 0).getDate();
 	
 	$: calendarCellsQty = firstDayIndex <= 4 ? 35 : 42;	
-
-	$: checkDayHasAns = ''
 
 	
 	const goToNextMonth = () => {
@@ -50,23 +48,7 @@
 	// *** db stuff ***
   
 	import { createAnsDaysRefObj, app, db, auth } from "../lib/firebase"
-	import {onMount} from 'svelte'
 	
-	
-	onMount(async () => {
-		let usersAnsByDay = await createAnsDaysRefObj(auth.currentUser.uid)
-	
-		checkDayHasAns = (i) => {
-		let thisDay = `${(i-firstDayIndex)+1}/${month}/${year}`
-
-		console.log(thisDay, usersAnsByDay[thisDay], usersAnsByDay);
-
-		return usersAnsByDay[thisDay] && usersAnsByDay[thisDay].length > 0
-	}
-	})
-
-	
-
 
 </script>
 
@@ -75,7 +57,7 @@
 		<ul>
 			<li class="prev" on:click={goToPrevMonth}>&#10094;</li>
 			<li class="next" on:click={goToNextMonth}>&#10095;</li>
-			<li>{month}<br>
+			<li>{month.word}<br>
 				<span style="font-size:18px">{year}</span>
 			</li>
 		</ul>
@@ -92,21 +74,29 @@
 	</ul>
 
 	<ul class="days">
-		{#each Array(calendarCellsQty) as _, i}
+		{#await createAnsDaysRefObj(auth.currentUser.uid)}
+			<p>Loading...</p>
+		{:then usersAnsByDay} 
+			
+		
+			{#each Array(calendarCellsQty) as _, i}
 			{#if i < firstDayIndex || i >= numberOfDays+firstDayIndex  }
-				<li>&nbsp;</li>
+			<li>&nbsp;</li>
 			{:else}
-				<li class:active={i === today.dayNumber+(firstDayIndex-1) &&
-					monthIndex === today.month && year === today.year}
-					id={`${(i-firstDayIndex)+1}/${month}/${year}`}
-					
-					class:has-answers={checkDayHasAns(i)}
-					>
-
-					{(i - firstDayIndex) + 1}
-				</li>
-			{/if}
-		{/each}
+			
+			
+			<li class:active={i === today.dayNumber+(firstDayIndex-1) &&
+						monthIndex === today.month && year === today.year}
+						id={`${(i-firstDayIndex)+1}/${month.num}/${year}`}
+						
+						class:has-answers={usersAnsByDay[`${(i-firstDayIndex)+1}/${month.num}/${year}`] || usersAnsByDay[`0${(i-firstDayIndex)+1}/${month.num}/${year}`]}
+						>
+						
+						{(i - firstDayIndex) + 1}
+					</li>
+					{/if}
+					{/each}
+		{/await}
 	</ul>
 
 
