@@ -1,6 +1,10 @@
 <script>
-	export let schedule;
+
+	// *** calendar stuff ***
 	const date = new Date();
+
+	// store answers by day
+	// if day list empty...
 	
 	const today = {
 		dayNumber: date.getDate(),
@@ -8,18 +12,21 @@
 		year: date.getFullYear(),
 	}
 	
-	const monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	const monthNames = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
 	let monthIndex = date.getMonth();
-	// const currentMonth = date.toLocaleString('en-US', { month: 'long' })
+	
 	$: month = monthNames[monthIndex];
 	
 	let year = date.getFullYear();
 	
 	$: firstDayIndex = new Date(year, monthIndex, 1).getDay();
-	// const currentDay = date.getDate();
+	
 	$: numberOfDays = new Date(year, monthIndex+1, 0).getDate();
 	
 	$: calendarCellsQty = firstDayIndex <= 4 ? 35 : 42;	
+
+	$: checkDayHasAns = ''
+
 	
 	const goToNextMonth = () => {
 		if (monthIndex >= 11) {
@@ -38,6 +45,29 @@
 	}
 	
 // 	$: console.log(`${month}, ${today.dayNumber}, ${year}, FIRST DAY index is ${firstDayIndex}, MONTH index is ${monthIndex}, No. of days: ${numberOfDays}`)
+	
+
+	// *** db stuff ***
+  
+	import { createAnsDaysRefObj, app, db, auth } from "../lib/firebase"
+	import {onMount} from 'svelte'
+	
+	
+	onMount(async () => {
+		let usersAnsByDay = await createAnsDaysRefObj(auth.currentUser.uid)
+	
+		checkDayHasAns = (i) => {
+		let thisDay = `${(i-firstDayIndex)+1}/${month}/${year}`
+
+		console.log(thisDay, usersAnsByDay[thisDay], usersAnsByDay);
+
+		return usersAnsByDay[thisDay] && usersAnsByDay[thisDay].length > 0
+	}
+	})
+
+	
+
+
 </script>
 
 
@@ -67,10 +97,12 @@
 				<li>&nbsp;</li>
 			{:else}
 				<li class:active={i === today.dayNumber+(firstDayIndex-1) &&
-													monthIndex === today.month &&
-													year === today.year}
-						data-dateID={`${month}_${(i-firstDayIndex)+1}_${year}`}
-						>
+					monthIndex === today.month && year === today.year}
+					id={`${(i-firstDayIndex)+1}/${month}/${year}`}
+					
+					class:has-answers={checkDayHasAns(i)}
+					>
+
 					{(i - firstDayIndex) + 1}
 				</li>
 			{/if}
@@ -158,7 +190,7 @@
 		color: white;
 	}
 	
-	.days li.has-appts {
+	.days li.has-answers {
 		color: #F2480A;
 	}
 </style>
