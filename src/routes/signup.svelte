@@ -30,6 +30,9 @@
           date_of_birth: details.date_of_birth,
           about: "write something about yourself"
         });
+        setDoc(doc(db, 'answers', auth.currentUser.uid), {
+          original_set: []
+        })
       })
       .then(() => {
         goto("/signin");
