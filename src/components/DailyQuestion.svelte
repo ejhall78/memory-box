@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { initializeApp } from "@firebase/app";
     import {
         getFirestore,
@@ -38,6 +38,13 @@
 
     console.log("inside DailyQuestion.svelte");
 
+    type questionObj = {
+        category: Record<string, any>;
+        question: string
+        question_id: number
+    }
+
+
     $: isLoading = true;
 
     /*
@@ -46,25 +53,36 @@
     */
 
     onMount(() => {
-        getAnswers(auth.currentUser.uid).then((answerList) => {
+        getAnswers(auth.currentUser.uid).then((answerList): void => {
             // console.log('answer_id......', answerList.original_set.length + 1)
             values.answer_id = answerList.original_set.length + 1;
         });
-        getTodaysQuestion(dayOfTheMonth).then((questionData) => {
+        getTodaysQuestion(dayOfTheMonth).then((questionData): void => {
             console.log(questionData);
             values.question_title = questionData.question;
         });
     });
 
-    const date = new Date(Date.now()).toLocaleDateString("en-GB");
+    const date: string = new Date(Date.now()).toLocaleDateString("en-GB");
     const dayOfTheMonth = Number(date.slice(0, 2));
 
-    function forgetMemory(currentValue) {
+    function forgetMemory(currentValue: boolean): boolean {
         console.log(values.forget);
         return (values.forget = !currentValue);
     }
 
-    const values = {
+    type Values = {
+        answer_id?: number
+        body: string
+        date: string
+        forget: boolean
+        length?: number
+        question_id: number
+        question_set: number       
+        question_title?: string
+    };
+
+    const values: Values = {
         body: "",
         forget: false,
         date,
@@ -72,8 +90,8 @@
         question_id: dayOfTheMonth,
     };
 
-    const submitHandler = async (newAnswer) => {
-        const wordCount = values.body.split(" ").length;
+    const submitHandler = async (newAnswer: Values): Promise<void> => {
+        const wordCount: number = values.body.split(" ").length;
         values.length = wordCount;
         await updateDoc(doc(db, "answers", auth.currentUser.uid), {
             original_set: arrayUnion(newAnswer),
@@ -82,10 +100,10 @@
     };
 
     const dailyQuestionGetter = () => {
-        return getQuestions().then((questions) => {
-            const date = new Date(Date.now()).toLocaleDateString("en-GB");
+        return getQuestions().then((questions): questionObj => {
+            const date: string = new Date(Date.now()).toLocaleDateString("en-GB");
             const dayOfTheMonth = Number(date.slice(0, 2));
-            const todaysQuestion = questions.original_set.filter((question) => {
+            const todaysQuestion: questionObj = questions.original_set.filter((question) => {
                 return question.question_id === dayOfTheMonth;
             })[0];
             return todaysQuestion;
