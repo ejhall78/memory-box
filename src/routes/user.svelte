@@ -25,22 +25,36 @@
 </script>
 
 <div class="profile">
-    <div>
+    <!-- <div>
         {#if loggedIn}
             <p>Hello {auth.currentUser.email}!</p>
             <p>Your username is: {auth.currentUser.displayName}</p>
         {:else}
             <p>Who are you...</p>
         {/if}
-    </div>
-    <div>
+    </div> -->
+    <div class="userInfo">
         {#if loggedIn}
-            <p>Your very own user document contains the following information:</p>
             {#await getUserInfo(auth.currentUser.uid)}
                 <p>Loading......</p>
             {:then userInfo}
                 {#if userInfo}
-                    <p>{Object.keys(userInfo)} {Object.values(userInfo)}</p>
+                <section class="top"> <p class="heading">Hello {userInfo.first_name}</p>
+                    <img src={userInfo.profile_picture} class="profile_picture" alt="profile_picture"/>
+                    <p class="about">{userInfo.about}</p></section>
+                   
+                    <ul>
+                       
+                        <li><span>Name:</span> <span class="details"> {userInfo.first_name} {userInfo.last_name}</span></li>
+                        <li><span>Email:</span> <span class="details">{auth.currentUser.email}</span></li>
+                        <li><span>Birthday: </span><span class="details">{userInfo.date_of_birth}</span></li>    
+                    </ul>
+                    
+                    <!-- {Object.keys(userInfo)} {Object.values(userInfo)} -->
+                   <p><button class="signOutButton" on:click={logout}>Sign Out</button>
+                    <button class="editProfile" on:click={()=> goto("/editprofile")}>edit profile</button>
+                </p> 
+              
                 {:else}
                     <p>...nothing!</p>
                 {/if}
@@ -49,13 +63,84 @@
             {/await}
         {/if}
     </div>
-    <div>
-        <button on:click={logout}>Sign Out</button>
-    </div>
+   
 </div>
 
 <style>
     .profile {
-        border: 5px solid red;
+        background-color: #4FC5BD;
+        font-family: 'La Belle Aurore', cursive;
+        text-align: center;
+
+    }
+
+    .top {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #2C9E97;
+        border-radius: 100%;      
+    }
+
+
+    .about {
+        position: relative;
+        background-color: rgb(78, 179, 172);
+        border-radius: 25px;
+        text-align: center;
+    }
+
+   .userInfo {
+       
+       font-size: 1.2rem;
+       text-align: center;
+   }
+    .profile_picture {
+        border-radius: 100%;
+        width: 50%;
+        position: relative;
+        padding-left: 25%;
+        padding-right: 25%;
+            
+    }
+    .heading {
+        font-family: 'Leckerli One', cursive;
+        font-size: 1.5rem;
+        padding: 20px 20px 20px 20px;
+        width: 70%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .signOutButton, .editProfile {
+        color: white;
+      background-color: #2C9E97;
+      border-style: none;
+      padding: 5px;
+      font-size: 1.1rem;;
+      width: 40%;
+      border-radius: 15px;
+      font-family: 'La Belle Aurore', cursive;
+      margin-bottom: 30px;
+    }
+    p {
+        margin: 7px;
+    }
+
+    ul {
+        padding-left: 0px;
+       
+    }
+   
+    li {
+        padding: 5px;
+    }
+
+    .details{
+        color: #2C9E97;
+        background-color: white;
+       
+        padding: 0px 10px 0px 10px;
+        border-radius: 25px;
     }
 </style>

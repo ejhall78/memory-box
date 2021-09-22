@@ -132,9 +132,13 @@
         padding: 15px;
     }
 
-    .questionTitle {
-        font-family: "Leckerli One", cursive;
-    }
+    
+    .questionTitle{ font-family: 'Leckerli One', cursive;
+font-weight: lighter;
+font-size: 1.5rem}
+
+
+ 
 
     #DailyQuestion-input {
         border: solid;
