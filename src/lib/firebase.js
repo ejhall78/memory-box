@@ -1,5 +1,5 @@
 import { initializeApp } from '@firebase/app';
-import { getFirestore, collection, getDocs, doc, getDoc } from '@firebase/firestore/lite';
+import { getFirestore, collection, getDocs, doc, getDoc, query, where } from '@firebase/firestore/lite';
 const apiKey = import.meta.env.VITE_KEY;
 const authDomain = import.meta.env.VITE_AUTHDOMAIN
 const projectId = import.meta.env.VITE_PROJECTID
@@ -40,4 +40,26 @@ export const getUserInfo = async (uid) => {
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
   return docData;
+};
+
+export const getAnswers = async (uid) => {
+  const docRef = doc(db, 'answers', uid);
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  return docData
+};
+
+export const getQuestions = async () => {
+  const docRef = doc(db, 'questions', 'question_sets');
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  return docData;
+};
+
+export const getTodaysQuestion = async (day) => {
+  const docRef = doc(db, 'questions', 'question_sets');
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  const todaysQuestion = docData.original_set.filter(question => question['question_id'] === day);
+  return todaysQuestion[0];
 };
