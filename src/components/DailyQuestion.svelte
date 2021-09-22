@@ -1,8 +1,18 @@
 <script>
     import { initializeApp } from "@firebase/app";
-    import { getFirestore, doc, setDoc, arrayUnion, updateDoc } from "@firebase/firestore/lite";
-    import { getQuestions, getAnswers, getTodaysQuestion } from "../lib/firebase.js";
-    import { getAuth, onAuthStateChanged } from 'firebase/auth';
+    import {
+        getFirestore,
+        doc,
+        setDoc,
+        arrayUnion,
+        updateDoc,
+    } from "@firebase/firestore/lite";
+    import {
+        getQuestions,
+        getAnswers,
+        getTodaysQuestion,
+    } from "../lib/firebase.js";
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
     import { onMount } from "svelte";
     const apiKey = import.meta.env.VITE_KEY;
     const authDomain = import.meta.env.VITE_AUTHDOMAIN;
@@ -36,20 +46,17 @@
     */
 
     onMount(() => {
-        getAnswers(auth.currentUser.uid)
-        .then (answerList => {
+        getAnswers(auth.currentUser.uid).then((answerList) => {
             // console.log('answer_id......', answerList.original_set.length + 1)
             values.answer_id = answerList.original_set.length + 1;
         });
-        getTodaysQuestion(dayOfTheMonth)
-        .then(questionData => {
-            console.log(questionData)
-            values.question_title = questionData.question
+        getTodaysQuestion(dayOfTheMonth).then((questionData) => {
+            console.log(questionData);
+            values.question_title = questionData.question;
         });
     });
-    
 
-    const date = new Date(Date.now()).toLocaleDateString('en-GB');
+    const date = new Date(Date.now()).toLocaleDateString("en-GB");
     const dayOfTheMonth = Number(date.slice(0, 2));
 
     function forgetMemory(currentValue) {
@@ -62,46 +69,40 @@
         forget: false,
         date,
         question_set: 1,
-        question_id: dayOfTheMonth
+        question_id: dayOfTheMonth,
     };
 
     const submitHandler = async (newAnswer) => {
-        const wordCount = values.body.split(' ').length;
+        const wordCount = values.body.split(" ").length;
         values.length = wordCount;
-        await updateDoc(doc(db, 'answers', auth.currentUser.uid), {
-            original_set: arrayUnion(newAnswer)
+        await updateDoc(doc(db, "answers", auth.currentUser.uid), {
+            original_set: arrayUnion(newAnswer),
         });
         console.log("submitted");
     };
 
-
     const dailyQuestionGetter = () => {
         return getQuestions().then((questions) => {
-            const date = new Date(Date.now()).toLocaleDateString('en-GB');
+            const date = new Date(Date.now()).toLocaleDateString("en-GB");
             const dayOfTheMonth = Number(date.slice(0, 2));
-            const todaysQuestion = questions.original_set.filter(question => {
+            const todaysQuestion = questions.original_set.filter((question) => {
                 return question.question_id === dayOfTheMonth;
             })[0];
             return todaysQuestion;
         });
     };
-
 </script>
 
 <div class="dailyQuestion">
     <h3 class="questionTitle">Today's Question</h3>
     <label for="DailyQuestion-input">
         {#await dailyQuestionGetter()}
-        <p class="questionText">Loading....</p>
+            <p class="questionText">Loading....</p>
         {:then data}
-        <p class="questionText">{data['question']}</p>
+            <p class="questionText">{data["question"]}</p>
         {/await}
     </label>
-    <textarea
-        type="text"
-        id="DailyQuestion-input"
-        bind:value={values.body}
-    />
+    <textarea type="text" id="DailyQuestion-input" bind:value={values.body} />
     <p>
         {#if values.forget}
             <button
@@ -120,7 +121,8 @@
         {/if}
     </p>
 
-    <button class="submit" on:click={() => submitHandler(values)}>Submit</button>
+    <button class="submit" on:click={() => submitHandler(values)}>Submit</button
+    >
 </div>
 
 <style>
