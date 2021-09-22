@@ -4,7 +4,7 @@
         <li><a href="/">home</a></li>
         <li><a href="/signin">sign in</a></li>
         <li><a href="/signup">sign up</a></li>
-        <li><a href="/settings">settings</a></li>
+        <li><a href="/memories">memories</a></li>
         <li><a href="/user">profile</a></li>
         <li><a href="/friendlist">friend list</a></li>
     </ul>

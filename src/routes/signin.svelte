@@ -31,7 +31,11 @@
 </script>
 
 <div class="signIn">
-    <h3>Open your Memory Box...</h3>
+
+    {#if auth.currentUser}
+	<p>Hello!</p>
+{:else}
+	 <h3>Open your Memory Box...</h3>
     <form on:submit|preventDefault={submitHandler(values)}>
     <div>
         <label for="email">Email</label>
@@ -56,6 +60,9 @@
     </div>
 </form>
     <p>No account? <a href="/signup">Click here</a> to sign up!</p>
+{/if}
+
+   
 </div>
 
 <style>
