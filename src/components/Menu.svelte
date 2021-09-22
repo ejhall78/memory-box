@@ -1,16 +1,24 @@
 <div class="pieBarm">
-    <h3>pie barm</h3>
-    <a href="/">home</a>
-    <a href="/signin">sign in</a>
-    <a href="/signup">sign up</a>
-    <a href="/settings">settings</a>
-    <a href="/user">profile</a>
-    <a href="/friendlist">friend list</a>
+    <!-- <h3>pie barm</h3> -->
+    <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/signin">sign in</a></li>
+        <li><a href="/signup">sign up</a></li>
+        <li><a href="/settings">settings</a></li>
+        <li><a href="/user">profile</a></li>
+        <li><a href="/friendlist">friend list</a></li>
+    </ul>
+    
 </div>
 
 
 <style>
     .pieBarm {
-        border: 5px solid orange;
+    display: flex;
+ justify-content: center;
     }
+ul {
+  padding-left: 10px;;
+}
+
 </style>

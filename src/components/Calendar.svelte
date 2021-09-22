@@ -99,9 +99,9 @@
 		{/await}
 	</ul>
 
-
 				
 <style>
+
 	ul {list-style-type: none;}
 
 	/* Month header */
@@ -183,4 +183,5 @@
 	.days li.has-answers {
 		color: #F2480A;
 	}
+
 </style>
