@@ -6,6 +6,8 @@ import {
   getDocs,
   doc,
   getDoc,
+  query,
+  where
 } from '@firebase/firestore/lite';
 const apiKey = import.meta.env.VITE_KEY;
 const authDomain = import.meta.env.VITE_AUTHDOMAIN;
@@ -49,6 +51,28 @@ export const getUserInfo = async uid => {
   const docData = docSnap.data();
   return docData;
 };
+
+
+export const getAnswers = async (uid) => {
+  const docRef = doc(db, 'answers', uid);
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  return docData
+};
+
+export const getQuestions = async () => {
+  const docRef = doc(db, 'questions', 'question_sets');
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  return docData;
+};
+
+export const getTodaysQuestion = async (day) => {
+  const docRef = doc(db, 'questions', 'question_sets');
+  const docSnap = await getDoc(docRef);
+  const docData = docSnap.data();
+  const todaysQuestion = docData.original_set.filter(question => question['question_id'] === day);
+  return todaysQuestion[0];
 
 export const getAnswersByUser = async uid => {
   const docRef = doc(db, 'answers', uid);

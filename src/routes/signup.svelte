@@ -25,6 +25,9 @@
         setDoc(doc(db, 'users', auth.currentUser.uid), {
           hello: 'world!'
         });
+        setDoc(doc(db, 'answers', auth.currentUser.uid), {
+          original_set: []
+        })
       })
       .then(() => {
         goto("/user");
