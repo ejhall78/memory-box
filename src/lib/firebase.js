@@ -1,12 +1,15 @@
-import { initializeApp } from '@firebase/app';
-import { getAuth } from '@firebase/auth';
+import { initializeApp } from "@firebase/app";
+import { getAuth } from "@firebase/auth";
 import {
   getFirestore,
   collection,
   getDocs,
   doc,
   getDoc,
-} from '@firebase/firestore/lite';
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
+} from "@firebase/firestore/lite";
 const apiKey = import.meta.env.VITE_KEY;
 const authDomain = import.meta.env.VITE_AUTHDOMAIN;
 const projectId = import.meta.env.VITE_PROJECTID;
@@ -37,27 +40,27 @@ export const auth = getAuth();
 
 // Get a list of users from your database
 export const getUsers = async () => {
-  const usersCol = collection(db, 'users');
+  const usersCol = collection(db, "users");
   const userSnapshot = await getDocs(usersCol);
-  const userList = userSnapshot.docs.map(doc => doc.data());
+  const userList = userSnapshot.docs.map((doc) => doc.data());
   return userList;
 };
 
-export const getUserInfo = async uid => {
-  const docRef = doc(db, 'users', uid);
+export const getUserInfo = async (uid) => {
+  const docRef = doc(db, "users", uid);
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
   return docData;
 };
 
-export const getAnswersByUser = async uid => {
-  const docRef = doc(db, 'answers', uid);
+export const getAnswersByUser = async (uid) => {
+  const docRef = doc(db, "answers", uid);
   const docSnap = await getDoc(docRef);
   const answers = docSnap.data();
   return answers.original_set;
 };
 
-export const createAnsDaysRefObj = async uid => {
+export const createAnsDaysRefObj = async (uid) => {
   // check if a user is signed in
   // await get answers by user
   const answers = await getAnswersByUser(uid);
@@ -69,7 +72,7 @@ export const createAnsDaysRefObj = async uid => {
   // check each answers date
   // if date of answer already exists in formattedAnswers, push answer to that date array
   // else create an array with that dates key and push answer to that array
-  answers.forEach(answer => {
+  answers.forEach((answer) => {
     if (answer.date in formattedAnswers) {
       answer.date.push(answer);
     } else {
@@ -79,4 +82,22 @@ export const createAnsDaysRefObj = async uid => {
 
   // return formattedAnswers
   return formattedAnswers;
+};
+
+export const deleteMemory = async (answer, uid) => {
+  const memoryRef = doc(db, "answers", uid);
+  await updateDoc(memoryRef, {
+    original_set: arrayRemove(answer),
+  });
+};
+
+export const toggleMemoryForget = async (answers, answer, uid, i) => {
+  const memoryRef = doc(db, "answers", uid);
+  const newAnswer = { ...answer };
+  newAnswer.forget ? (newAnswer.forget = false) : (newAnswer.forget = true);
+  const newArray = [...answers];
+  newArray.splice(i, 1, newAnswer);
+  await updateDoc(memoryRef, {
+    original_set: newArray,
+  });
 };
