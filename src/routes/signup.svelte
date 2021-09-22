@@ -44,7 +44,11 @@
 </script>
 
 <div class="signUp">
-  <h3>Create your Memory Box...</h3>
+  {#if auth.currentUser}
+	<p>Hello!</p>
+{:else}
+
+<h3>Create your Memory Box...</h3>
   <p>Create an account to get started</p>
   <form on:submit|preventDefault={submitHandler(values)}>
     <div>
@@ -79,6 +83,9 @@
     </div>
   </form>
   <p>Already have an account? <a href="/signin">Click here</a> to sign in!</p>
+
+{/if}
+  
 </div>
 
 <style>
