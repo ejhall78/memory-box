@@ -1,31 +1,10 @@
 <script>
     console.log("inside signin");
     import { goto } from '$app/navigation';
-    import { initializeApp } from "@firebase/app";
-    import { getFirestore } from "@firebase/firestore/lite";
-    const apiKey = import.meta.env.VITE_KEY;
-    const authDomain = import.meta.env.VITE_AUTHDOMAIN;
-    const projectId = import.meta.env.VITE_PROJECTID;
-    const storageBucket = import.meta.env.VITE_STORAGEBUCKET;
-    const messagingSenderId = import.meta.env.VITE_MESSAGINGSENDERID;
-    const appId = import.meta.env.VITE_APPID;
-    const measurementId = import.meta.env.VITE_MEASUREMENTID;
+    import {auth} from '../lib/firebase'
+  
+    import {  signInWithEmailAndPassword } from "firebase/auth";
 
-    const firebaseConfig = {
-        apiKey,
-        authDomain,
-        projectId,
-        storageBucket,
-        messagingSenderId,
-        appId,
-        measurementId,
-    };
-
-    export const app = initializeApp(firebaseConfig);
-    export const db = getFirestore(app);
-    import { EmailAuthCredential, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-    const auth = getAuth();
     const values = {};
 
     const submitHandler = (values) => {
