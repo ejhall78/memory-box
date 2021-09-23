@@ -73,12 +73,12 @@
 
 </script>
 
-
+<section class="calendar">
 	<div class="month">
 		<ul>
 			<li class="prev" on:click={goToPrevMonth}>&#10094;</li>
 			<li class="next" on:click={goToNextMonth}>&#10095;</li>
-			<li>{month.word}<br>
+			<li>{month.word}
 				<span style="font-size:18px">{year}</span>
 			</li>
 		</ul>
@@ -136,56 +136,70 @@
 	{/if}
 	
 
+
+
+</section>
+
 <style>
 
 	ul {list-style-type: none;}
 
 	/* Month header */
 	.month {
-		padding: 70px 25px;
+		padding: 10px 0px;
 		width: auto;
-		background: #1abc9c;
+		background: #2C9E97;
 		text-align: center;
+		font-family: "Leckerli One", cursive;
+		border-radius: 15px;
 	}
-
+  
+	.calendar{
+		background: #2C9E97;
+		border-radius: 15px;
+	}
 	/* Month list */
 	.month ul {
 		margin: 0;
 		padding: 0;
+	
 	}
 
 	.month ul li {
 		color: white;
 		font-size: 20px;
-		text-transform: uppercase;
 		letter-spacing: 3px;
 	}
 
 	/* Previous button inside month header */
 	.month .prev {
 		float: left;
-		padding-top: 10px;
+		padding-top: 0px;
 		cursor: pointer;
+		color: #1E8680;
 	}
 
 	/* Next button */
 	.month .next {
 		float: right;
-		padding-top: 10px;
+		padding-top: 0px;
 		cursor: pointer;
+		color: #1E8680;
 	}
 
 	/* Weekdays (Mon-Sun) */
 	.weekdays {
 		margin: 0;
-		padding: 10px 0;
-		background-color:#ddd;
+		padding: 0px 0;
+		background: #2C9E97;
+		font-family: 'Leckerli One', cursive;
+		font-size: 0.5rem;
 	}
 
 	.weekdays li {
 		display: inline-block;
-		width: 13.6%;
-		color: #666;
+		width: 13%;
+		color: white;
 		text-align: center;
 	}
 
@@ -207,6 +221,7 @@
 		font-size: 1.2rem;
 		color: #777;
 		cursor: pointer;
+		border-radius: 15px;
 	}
 
 	/* Highlight the "current" day */
