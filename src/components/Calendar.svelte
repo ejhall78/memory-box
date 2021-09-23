@@ -220,7 +220,7 @@
 
 	/* Days (1-31) */
 	.days {
-		padding: 10px 0px 4px 3px;
+		padding: 10px 0px 12px 3px;
 		margin: 0;
 	}
 
@@ -231,11 +231,14 @@
 		width: 8%;
 		text-align: center;
 		margin: 2px;
-		font-size: 1.2rem;
+		font-size: 1rem;
 		color: #1D6468;
 		cursor: pointer;
 		border-radius: 10px;
-		background-color: white
+		background-color: white;
+		font-family: 'Leckerli One', cursive;
+    font-weight: lighter;
+		box-shadow: inset 5px 5px rgb(231, 239, 240);
 	}
 
 	/* Highlight the "current" day */
@@ -246,8 +249,9 @@
 	}
 	
 	.days li.has-answers {
-		color: #F2480A;
-		background-color: #4FC5BD;
+		color: #1D6468;
+		background-color: rgb(180, 234, 238);
+		box-shadow: 5px 10px rgb(57, 131, 141);
 	}
 
 	.highlight {
