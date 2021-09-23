@@ -13,5 +13,20 @@
 <Highlights />
 
 {:else}
-	Please <a href='/signin'>Log In</a>
+	<div class="signInPage">Please <a href='/signin'>Log In</a></div>
 {/if}
+
+<style>
+.signInPage {
+	background-color: #59c5be;
+	padding: 20px;
+	width: 80%;
+	border-radius: 25px;
+	text-align: center;
+	margin: 20px;
+	font-family: 'Leckerli One', cursive;
+  font-weight: lighter;
+  font-size: 1.5rem;
+}
+
+</style>

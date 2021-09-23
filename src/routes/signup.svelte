@@ -54,7 +54,7 @@
 <div class="signUp">
 
   {#if auth.currentUser}
-	<p>Hello!</p>
+	<div class="alreadySignedIn"><p>You are already signed in.</p><p class="linkToProfile"> Click <a href="/user">here</a> to be taken to your profile.</p></div>
 {:else}
 
 <h3>Create your Memory Box...</h3>
@@ -174,6 +174,22 @@
    margin-top: 30px;
       font-family: 'La Belle Aurore', cursive;
   }
+  .alreadySignedIn {
+    background-color: #2c9e97;
+	padding: 20px;
+	width: 80%;
+	border-radius: 25px;
+	text-align: center;
+	margin: 20px;
+	font-family: 'Leckerli One', cursive;
+    font-weight: lighter;
+    font-size: 1.5rem;
+    }
+    .linkToProfile {
+        font-family: "La Belle Aurore", cursive;
+    font-size: 1.2rem;
+    }
+
 
 /* form {
   display: flex;
