@@ -95,6 +95,7 @@ import { onMount } from "svelte";
    text-align: center;
    font-size: 1.2rem;
     }
+
  button {
     color: white;
       background-color: #2C9E97;
@@ -110,6 +111,11 @@ import { onMount } from "svelte";
 
 div {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 15px 0px
+ 
  
 }
 
@@ -126,7 +132,6 @@ div {
     border-radius: 25px;
     padding: 5px 0px 5px 20px;
     border-style: none;
-    margin: 5px;
    margin-left: 20px;
    font-size: 1rem;
    width: 50%;

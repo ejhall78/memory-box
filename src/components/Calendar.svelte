@@ -136,13 +136,16 @@
 				<button class="closeButton" on:click={() => showList = false}>Close</button>
 				<p class="no-highlight">You have chosen to forget this memory</p>
 			{:else}
-				<button on:click={() => showList = false}>Close</button>
+				
 				<div class="highlight">
 					<p class="highlight__date">On {answer.date}, you answered:</p>
 					<h4 class="highlight__title">{answer.question_title}</h4>
 
 					<p class="highlight__info">{answer.body}</p>
+					
 				</div>
+
+				<button on:click={() => showList = false}>Close</button>
 			{/if}
 		{/each}
 	{/if}
@@ -160,7 +163,7 @@
 
   button {
 		color: white;
-      background-color:#4FC5BD;
+      background-color:rgb(54, 167, 159);
       border-style: none;
       padding: 2px;
       font-size: 1.1rem;;
@@ -170,7 +173,8 @@
       font-family: 'Leckerli One', cursive;
       font-weight: light;
       margin-bottom: 20px;
-			margin: auto 35%;
+			margin: 10px 35%;
+			box-shadow: 0px 0px 3px 2px  rgba(255, 255, 255, 0.514);
 
 	}
 
@@ -187,6 +191,7 @@
 	.calendar{
 		background: #2C9E97;
 		border-radius: 15px;
+		padding-bottom: 7px
 	}
 	/* Month list */
 	.month ul {
@@ -230,6 +235,7 @@
 		display: inline-block;
 		width: 13%;
 		color: white;
+	
 		text-align: center;
 		font-size: 0.9rem;
 		padding-left: 1.2px;
@@ -258,8 +264,8 @@
 		box-shadow: inset 5px 5px rgb(231, 239, 240);
 	}
 	.days li.active {
-    background-color: rgb(0, 175, 152);
-		color: white
+    background-color: rgb(0, 175, 152) !important;
+		color: white !important
     }
 
 	/* Highlight the "current" day */

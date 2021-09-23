@@ -33,6 +33,15 @@
 {/if}
 
 <style>
+	a:visited {
+        color:rgb(7, 83, 77);
+        text-decoration: none;
+    }
+
+    a{ 
+        color: white;
+    }
+
 	.signInPage {
 		background-color: #59c5be;
 		padding: 20px;
