@@ -1,5 +1,5 @@
-import { initializeApp } from "@firebase/app";
-import { getAuth } from "@firebase/auth";
+import { initializeApp } from '@firebase/app';
+import { getAuth } from '@firebase/auth';
 import {
   getFirestore,
   collection,
@@ -10,8 +10,10 @@ import {
   arrayRemove,
   arrayUnion,
   query,
-  where
+  where,
+
 } from "@firebase/firestore/lite";
+
 
 const apiKey = import.meta.env.VITE_KEY;
 const authDomain = import.meta.env.VITE_AUTHDOMAIN;
@@ -43,51 +45,52 @@ export const auth = getAuth();
 
 // Get a list of users from your database
 export const getUsers = async () => {
-  const usersCol = collection(db, "users");
+  const usersCol = collection(db, 'users');
   const userSnapshot = await getDocs(usersCol);
-  const userList = userSnapshot.docs.map((doc) => doc.data());
+  const userList = userSnapshot.docs.map(doc => doc.data());
   return userList;
 };
 
-export const getUserInfo = async (uid) => {
-  const docRef = doc(db, "users", uid);
+export const getUserInfo = async uid => {
+  const docRef = doc(db, 'users', uid);
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
   return docData;
 };
 
-
-
 export const getAnswers = async (uid) => {
-  const docRef = doc(db, 'answers', uid);
+  const docRef = doc(db, "answers", uid);
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  return docData
+  return docData;
 };
 
 export const getQuestions = async () => {
-  const docRef = doc(db, 'questions', 'question_sets');
+  const docRef = doc(db, "questions", "question_sets");
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
   return docData;
 };
 
+
 export const getTodaysQuestion = async (day) => {
-  const docRef = doc(db, 'questions', 'question_sets');
+  const docRef = doc(db, "questions", "question_sets");
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  const todaysQuestion = docData.original_set.filter(question => question['question_id'] === day);
+  const todaysQuestion = docData.original_set.filter(
+    (question) => question["question_id"] === day
+  );
   return todaysQuestion[0];
 };
 
 export const getAnswersByUser = async (uid) => {
-  const docRef = doc(db, 'answers', uid);
+  const docRef = doc(db, "answers", uid);
   const docSnap = await getDoc(docRef);
   const answers = docSnap.data();
   return answers.original_set;
 };
 
-export const createAnsDaysRefObj = async (uid) => {
+export const createAnsDaysRefObj = async uid => {
   // check if a user is signed in
   // await get answers by user
   const answers = await getAnswersByUser(uid);
@@ -112,14 +115,14 @@ export const createAnsDaysRefObj = async (uid) => {
 };
 
 export const deleteMemory = async (answer, uid) => {
-  const memoryRef = doc(db, "answers", uid);
+  const memoryRef = doc(db, 'answers', uid);
   await updateDoc(memoryRef, {
     original_set: arrayRemove(answer),
   });
 };
 
 export const toggleMemoryForget = async (answers, answer, uid, i) => {
-  const memoryRef = doc(db, "answers", uid);
+  const memoryRef = doc(db, 'answers', uid);
   const newAnswer = { ...answer };
   newAnswer.forget ? (newAnswer.forget = false) : (newAnswer.forget = true);
   const newArray = [...answers];
@@ -127,4 +130,9 @@ export const toggleMemoryForget = async (answers, answer, uid, i) => {
   await updateDoc(memoryRef, {
     original_set: newArray,
   });
+};
+
+export const updateUserInfo = async (userInfo, uid) => {
+  const userRef = doc(db, 'users', uid);
+  await updateDoc(userRef, userInfo);
 };

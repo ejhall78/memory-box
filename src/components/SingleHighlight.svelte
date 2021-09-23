@@ -54,7 +54,7 @@
         {:then data}
             <h4>{data.question_title}</h4>
             <p>On {data.date}, you answered...</p>
-            <p>{data.body}</p>
+            <p class="answerData">{data.body}</p>
         {:catch error}
             <p>Whoops! Something went wrong: {error.message}</p>
         {/await}
@@ -66,7 +66,37 @@
 
 <style>
     .singleHighlight {
-        border: 5px solid red;
-        color: darkslategray;
+        text-align: center;
+        color: white;
+        margin: 20px;
+        padding: 5px;
+        background-color: #42B7B0;
+        border-radius: 10px;
+        font-family: 'La Belle Aurore', cursive;
     }
+    
+    .answerData{
+        background-color: white;
+    }
+
+    button:hover{
+    background-color: rgb(86, 184, 177);
+    }
+
+    button:active {
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.2);
+    background-color: rgb(86, 184, 177);
+    }
+
+    button {
+    color: white;
+      background-color: #2C9E97;
+      border-style: none;
+      padding: 5px;
+      font-size: 1.1rem;;
+      width: 30%;
+      border-radius: 15px;
+      font-family: 'La Belle Aurore', cursive;
+    }
+
 </style>

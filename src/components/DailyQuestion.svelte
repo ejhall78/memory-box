@@ -145,15 +145,17 @@
 
 <style>
     .dailyQuestion {
-        background-color: #59c5be;
-        text-align: center;
-        padding: 15px;
+    background-color: #59c5be;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.5rem;;
+   
     }
 
     
     .questionTitle{ font-family: 'Leckerli One', cursive;
-font-weight: lighter;
-font-size: 1.5rem}
+    font-weight: lighter;
+    font-size: 1.5rem}
 
 
  
@@ -164,17 +166,23 @@ font-size: 1.5rem}
         border-radius: 15px;
         padding: 10px;
         font-family: "La Belle Aurore", cursive;
+        color:#2c9e97;
+        width: 80%;
+        height: 40%;
+        font-size: 1rem;
+        font-weight: bold;
     }
 
     .submit {
         color: white;
         background-color: #2c9e97;
         border-style: none;
-        padding: 5px;
+        padding: 10px 5px;
         font-size: 1.1rem;
-        width: 20%;
+        width: 30%;
         border-radius: 15px;
-        font-family: "La Belle Aurore", cursive;
+        font-family: "Leckerli One", cursive;
+        margin-bottom: 10px;
     }
 
     .forgetButton {
@@ -198,4 +206,13 @@ font-size: 1.5rem}
         font-family: "La Belle Aurore", cursive;
         font-size: 1.2rem;
     }
+
+    button:hover{
+    background-color: rgb(86, 184, 177);
+}
+
+button:active {
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.2);
+    background-color: rgb(86, 184, 177);
+}
 </style>

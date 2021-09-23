@@ -19,29 +19,33 @@
 
 <style>
 
-  .dropdown {
-  position: relative;
+.dropdown {
   display: inline-block;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
+  background-color: rgb(162, 224, 214);
+  width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
   z-index: 1;
+  transition: height 2s;
 }
+
+
 
 .dropdown:hover .dropdown-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  display: block;
+  position: absolute;
+  left: -10px;
+  top: 60px;
+  width: calc(100% + 20px);
+  text-align: center;
+  transition: height 2s;
 }
-
-
 
   .header {
     display: flex;
@@ -62,14 +66,14 @@
   .body {
     color: white;
     width: 100%;
-    margin: 0;
-   
   }
 
-  .menu {
+.menu {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width:60%;
+  margin-top: 0;
+  transition: height 2s;
 }
+
 </style>
