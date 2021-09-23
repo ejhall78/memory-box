@@ -56,12 +56,13 @@
                     <button class="editProfile" on:click={()=> goto("/editprofile")}>Edit Profile</button>
                 </p> 
               
-                {:else}
-                    <p>...nothing!</p>
+                
                 {/if}
             {:catch error}
                 <p>Whoops! Something went wrong: {error.message}</p>
             {/await}
+            {:else}
+                <div class="please">Please <a class="signinlink"href='/signin'>Log In</a></div>
         {/if}
     </div>
    
@@ -165,5 +166,25 @@
         font-family: 'Leckerli One', cursive;
    font-weight: lighter;
    margin-left: 20px
+    }
+
+    .please {
+    background-color: #59c5be;
+		padding: 20px;
+		width: 80%;
+		border-radius: 25px;
+		text-align: center;
+		margin: 20px;
+		font-family: "Leckerli One", cursive;
+		font-weight: lighter;
+		font-size: 1.5rem;
+ }
+
+ a:visited {
+        color:rgb(7, 83, 77) ;
+        text-decoration: none ;
+  }
+    a{ 
+        color: white;
     }
 </style>
