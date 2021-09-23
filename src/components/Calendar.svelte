@@ -41,14 +41,35 @@
 		}
 		return monthIndex -= 1;
 	}
+
 	
 // 	$: console.log(`${month}, ${today.dayNumber}, ${year}, FIRST DAY index is ${firstDayIndex}, MONTH index is ${monthIndex}, No. of days: ${numberOfDays}`)
 	
 
 	// *** db stuff ***
   
-	import { createAnsDaysRefObj, app, db, auth } from "../lib/firebase"
+	import { createAnsDaysRefObj, app, db, auth, getAnswersByDay } from "../lib/firebase"
+
+	let showList = false
+	let showEmptyMessage = false
+	let ansList = []
 	
+	const displayAnsByDay = (refObj, day) => {
+		const ansByDay = refObj[day] || refObj['0' + day]
+
+		if (!ansByDay) {
+			// display message saying no answers for this day
+			showEmptyMessage = true
+		}
+
+		else {
+			// show list
+			// assign ansList to current day
+			// loop through ansList ans show each answer for a given day (in html below)
+			showList = true
+			ansList = ansByDay
+		}
+	}
 
 </script>
 
@@ -76,20 +97,19 @@
 	<ul class="days">
 		{#await createAnsDaysRefObj(auth.currentUser.uid)}
 			<p>Loading...</p>
-		{:then usersAnsByDay} 
-			
-		
+		{:then usersAnsByDay}
 			{#each Array(calendarCellsQty) as _, i}
 			{#if i < firstDayIndex || i >= numberOfDays+firstDayIndex  }
-			<li>&nbsp;</li>
+				<li>&nbsp;</li>
 			{:else}
 			
-			
-			<li class:active={i === today.dayNumber+(firstDayIndex-1) &&
+				
+				<li class:active={i === today.dayNumber+(firstDayIndex-1) &&
 						monthIndex === today.month && year === today.year}
 						id={`${(i-firstDayIndex)+1}/${month.num}/${year}`}
 						
 						class:has-answers={usersAnsByDay[`${(i-firstDayIndex)+1}/${month.num}/${year}`] || usersAnsByDay[`0${(i-firstDayIndex)+1}/${month.num}/${year}`]}
+						on:click={() => displayAnsByDay(usersAnsByDay, `${(i-firstDayIndex)+1}/${month.num}/${year}`)}
 						>
 						
 						{(i - firstDayIndex) + 1}
@@ -99,7 +119,23 @@
 		{/await}
 	</ul>
 
-				
+	{#if showEmptyMessage}
+		<button on:click={() => showEmptyMessage = false}>Close</button>
+		<p class="no-highlight">No highlights for this day</p>
+	{/if}
+
+	{#if showList}
+		{#each ansList as answer}
+			<button on:click={() => showList = false}>Close</button>
+			<div class="highlight">
+				<h4 class="highlight__title">Q: {answer.question_title}</h4>
+				<p class="highlight__info">On {answer.date}, you answered...</p>
+				<p class="highlight__info">{answer.body}</p>
+			</div>
+		{/each}
+	{/if}
+	
+
 <style>
 
 	ul {list-style-type: none;}
@@ -182,6 +218,41 @@
 	
 	.days li.has-answers {
 		color: #F2480A;
+	}
+
+	.highlight {
+    background-color: #4FC5BD;
+    padding: 20px;
+    font-family: 'La Belle Aurore', cursive;
+    /* font-weight: bolder; */
+    }
+
+		.highlight__title{
+    font-family: 'Leckerli One', cursive;
+    font-size: 1.5rem;
+    font-weight: lighter;
+  }
+
+	.highlight__info {
+		background-color: white;
+    font-family: 'La Belle Aurore', cursive;
+    font-weight: bold;
+    color: #2C9E97;
+    border-radius: 25px;
+    padding: 5px 0px 5px 20px;
+    border-style: none;
+    margin: 5px;
+   margin-left: 20px;
+   font-size: 1rem;
+   width: 50%;
+  
+  }
+
+	.no-highlight {
+		font-family: 'Leckerli One', cursive;
+    font-size: 1.5rem;
+    font-weight: lighter;
+		background-color: #4FC5BD
 	}
 
 </style>
