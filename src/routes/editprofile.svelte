@@ -29,7 +29,7 @@ import { onMount } from "svelte";
   <form on:submit|preventDefault={() => submitHandler(userInfo)}>
     <img src={userInfo.profile_picture} class="profile_picture" alt="profile">
     <div>
-      <label for="profile_picture">Profile Picture URL</label>
+      <label for="profile_picture">Picture URL</label>
       <input
       id="profile_picture"
       type="text"
@@ -56,7 +56,7 @@ import { onMount } from "svelte";
       />
     </div>
     <div>
-      <label for="date_of_birth">Birthday</label>
+      <label for="date_of_birth">My Birthday</label>
       <input
       id="date_of_birth"
       type="text"
@@ -76,7 +76,7 @@ import { onMount } from "svelte";
       />
     </div>
     <button type="submit">Update details</button>
-    <button on:click={() => goto('/user')}>Cancel changes and return to profile</button>
+    <button on:click|preventDefault={() => goto('/user')}>Cancel changes X</button>
   </form>
 </div>
   
