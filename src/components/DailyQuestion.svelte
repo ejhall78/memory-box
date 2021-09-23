@@ -39,7 +39,7 @@
     console.log("inside DailyQuestion.svelte");
 
     type questionObj = {
-        category: Record<string, any>;
+        category: Record<string, any>
         question: string
         question_id: number
     }
