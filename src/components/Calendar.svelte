@@ -48,7 +48,9 @@
 
 	// *** db stuff ***
   
+
 	import { createAnsDaysRefObj, app, db, auth } from "../lib/firebase"
+
 
 	let showList = false
 	let showEmptyMessage = false
@@ -171,7 +173,7 @@
 	}
 	/* Month list */
 	.month ul {
-		margin: 0;
+		margin: 0 0 0 0;
 		padding: 0;
 	
 	}
@@ -212,27 +214,28 @@
 		width: 13%;
 		color: white;
 		text-align: center;
+		font-size: 0.9rem;
+		padding-left: 1.2px;
 	}
 
 	/* Days (1-31) */
 	.days {
-		padding: 10px 0;
-		background: #eee;
+		padding: 10px 0px 4px 3px;
 		margin: 0;
 	}
 
 	.days li {
 		list-style-type: none;
 		display: inline-block;
-		border: 1px solid black;
 		padding: 9px;
-		width: 11.6%;
+		width: 8%;
 		text-align: center;
-		margin-bottom: 1px;
+		margin: 2px;
 		font-size: 1.2rem;
-		color: #777;
+		color: #1D6468;
 		cursor: pointer;
-		border-radius: 15px;
+		border-radius: 10px;
+		background-color: white
 	}
 
 	/* Highlight the "current" day */
@@ -244,6 +247,7 @@
 	
 	.days li.has-answers {
 		color: #F2480A;
+		background-color: #4FC5BD;
 	}
 
 	.highlight {
