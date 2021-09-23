@@ -76,7 +76,7 @@ const forgetHandler = (answerArray, answer, uid, i) => {
 </ul>
 
 {:else}
-	Please <a class="signinlink"href='/signin'>Log In</a>
+<div class="please">Please <a class="signinlink"href='/signin'>Log In</a></div>
 {/if}
 </div>
 
@@ -186,5 +186,16 @@ ul {
      font-weight: lighter;
  }   
 
+ .please {
+    background-color: #59c5be;
+		padding: 20px;
+		width: 80%;
+		border-radius: 25px;
+		text-align: center;
+		margin: 20px;
+		font-family: "Leckerli One", cursive;
+		font-weight: lighter;
+		font-size: 1.5rem;
+ }
  
 </style>
