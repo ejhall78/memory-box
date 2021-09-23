@@ -60,6 +60,7 @@
 		if (!ansByDay) {
 			// display message saying no answers for this day
 			showEmptyMessage = true
+			showList = false
 		}
 
 		else {
@@ -67,7 +68,9 @@
 			// assign ansList to current day
 			// loop through ansList ans show each answer for a given day (in html below)
 			showList = true
+			showEmptyMessage = false
 			ansList = ansByDay
+			console.log(ansList);
 		}
 	}
 
@@ -127,12 +130,17 @@
 
 	{#if showList}
 		{#each ansList as answer}
-			<button on:click={() => showList = false}>Close</button>
-			<div class="highlight">
-				<h4 class="highlight__title">Q: {answer.question_title}</h4>
-				<p class="highlight__info">On {answer.date}, you answered...</p>
-				<p class="highlight__info">{answer.body}</p>
-			</div>
+			{#if answer.forget}
+				<button on:click={() => showList = false}>Close</button>
+				<p class="no-highlight">You have chosen to forget this memory</p>
+			{:else}
+				<button on:click={() => showList = false}>Close</button>
+				<div class="highlight">
+					<h4 class="highlight__title">Q: {answer.question_title}</h4>
+					<p class="highlight__info">On {answer.date}, you answered...</p>
+					<p class="highlight__info">{answer.body}</p>
+				</div>
+			{/if}
 		{/each}
 	{/if}
 	
