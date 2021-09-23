@@ -14,6 +14,7 @@
     } from "../lib/firebase.js";
     import { getAuth, onAuthStateChanged } from "firebase/auth";
     import { onMount } from "svelte";
+    import TodaysAnswer from "./TodaysAnswer.svelte";
     const apiKey = import.meta.env.VITE_KEY;
     const authDomain = import.meta.env.VITE_AUTHDOMAIN;
     const projectId = import.meta.env.VITE_PROJECTID;
@@ -39,18 +40,13 @@
     console.log("inside DailyQuestion.svelte");
 
     type questionObj = {
-        category: Record<string, any>
-        question: string
-        question_id: number
-    }
-
+        category: Record<string, any>;
+        question: string;
+        question_id: number;
+    };
 
     $: isLoading = true;
-
-    /*
-    const isAnswered = (usersAnswers.includes(a => a.date === today && a.question_id === todaysQuestion.question_id))
-    {#if isAnswered} display the answer {:else} display the question
-    */
+    $: isAnswered = false;
 
     onMount(() => {
         getAnswers(auth.currentUser.uid).then((answerList): void => {
@@ -58,7 +54,7 @@
             values.answer_id = answerList.original_set.length + 1;
         });
         getTodaysQuestion(dayOfTheMonth).then((questionData): void => {
-            console.log(questionData);
+            // console.log(questionData);
             values.question_title = questionData.question;
         });
     });
@@ -72,14 +68,14 @@
     }
 
     type Values = {
-        answer_id?: number
-        body: string
-        date: string
-        forget: boolean
-        length?: number
-        question_id: number
-        question_set: number       
-        question_title?: string
+        answer_id?: number;
+        body: string;
+        date: string;
+        forget: boolean;
+        length?: number;
+        question_id: number;
+        question_set: number;
+        question_title?: string;
     };
 
     const values: Values = {
@@ -97,68 +93,92 @@
             original_set: arrayUnion(newAnswer),
         });
         console.log("submitted");
+        isAnswered = true;
     };
 
     const dailyQuestionGetter = () => {
         return getQuestions().then((questions): questionObj => {
-            const date: string = new Date(Date.now()).toLocaleDateString("en-GB");
-            const dayOfTheMonth = Number(date.slice(0, 2));
-            const todaysQuestion: questionObj = questions.original_set.filter((question) => {
-                return question.question_id === dayOfTheMonth;
-            })[0];
+            const todaysQuestion: questionObj = questions.original_set.filter(
+                (question) => {
+                    return question.question_id === dayOfTheMonth;
+                }
+            )[0];
             return todaysQuestion;
         });
     };
+
+    const hasAnsweredTodays = () => {
+        getAnswers(auth.currentUser.uid).then((answerList) => {
+            // console.log(answerList.original_set);
+            if (answerList.original_set.some((answer) => {
+                    return answer.date === date && answer.question_id === dayOfTheMonth
+                })) {
+                isAnswered = true;
+            }
+            else {
+                isAnswered = false;
+            }
+        });
+    };
+
+    hasAnsweredTodays();
+
 </script>
 
 <div class="dailyQuestion">
+    {#if !isAnswered}
     <h3 class="questionTitle">Today's Question</h3>
-    <label for="DailyQuestion-input">
-        {#await dailyQuestionGetter()}
-            <p class="questionText">Loading....</p>
-        {:then data}
-            <p class="questionText">{data["question"]}</p>
-        {/await}
-    </label>
-    <textarea type="text" id="DailyQuestion-input" bind:value={values.body} />
-    <p>
-        {#if values.forget}
-            <button
-                class="forgottenButton"
-                on:click={() => forgetMemory(values.forget)}
-            >
-                Forgotten
-            </button>
-        {:else}
-            <button
-                class="forgetButton"
-                on:click={() => forgetMemory(values.forget)}
-            >
-                Forget?
-            </button>
-        {/if}
-    </p>
+        <label for="DailyQuestion-input">
+            {#await dailyQuestionGetter()}
+                <p class="questionText">Loading....</p>
+            {:then data}
+                <p class="questionText">{data["question"]}</p>
+            {/await}
+        </label>
+        <textarea
+            type="text"
+            id="DailyQuestion-input"
+            bind:value={values.body}
+        />
+        <p>
+            {#if values.forget}
+                <button
+                    class="forgottenButton"
+                    on:click={() => forgetMemory(values.forget)}
+                >
+                    Forgotten
+                </button>
+            {:else}
+                <button
+                    class="forgetButton"
+                    on:click={() => forgetMemory(values.forget)}
+                >
+                    Forget?
+                </button>
+            {/if}
+        </p>
 
-    <button class="submit" on:click={() => submitHandler(values)}>Submit</button
-    >
+        <button class="submit" on:click={() => submitHandler(values)}
+            >Submit</button
+        >
+    {:else}
+        <TodaysAnswer />
+    {/if}
 </div>
 
 <style>
     .dailyQuestion {
-    background-color: #59c5be;
-    text-align: center;
-    padding: 15px;
-    font-size: 1.5rem;;
-   
+        background-color: #59c5be;
+        text-align: center;
+        padding: 15px;
+        font-size: 1.5rem;
     }
 
-    
-    .questionTitle{ font-family: 'Leckerli One', cursive;
-    font-weight: lighter;
-    font-size: 1.5rem}
-
-
- 
+    .questionTitle {
+        font-family: "Leckerli One", cursive;
+        font-weight: lighter;
+        font-size: 1.5rem;
+    }
 
     #DailyQuestion-input {
         border: solid;
@@ -166,7 +186,7 @@
         border-radius: 15px;
         padding: 10px;
         font-family: "La Belle Aurore", cursive;
-        color:#2c9e97;
+        color: #2c9e97;
         width: 80%;
         height: 40%;
         font-size: 1rem;
@@ -207,12 +227,13 @@
         font-size: 1.2rem;
     }
 
-    button:hover{
-    background-color: rgb(86, 184, 177);
-}
+    button:hover {
+        background-color: rgb(86, 184, 177);
+    }
 
-button:active {
-    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.2);
-    background-color: rgb(86, 184, 177);
-}
+    button:active {
+        box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2),
+            0 6px 20px 0 rgba(255, 255, 255, 0.2);
+        background-color: rgb(86, 184, 177);
+    }
 </style>
