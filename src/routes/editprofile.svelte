@@ -56,7 +56,7 @@ import { onMount } from "svelte";
       />
     </div>
     <div>
-      <label for="date_of_birth">My Birthday</label>
+      <label for="date_of_birth"> Birthday </label>
       <input
       id="date_of_birth"
       type="text"
@@ -75,8 +75,11 @@ import { onMount } from "svelte";
       bind:value={userInfo.about}
       />
     </div>
-    <button type="submit">Update details</button>
-    <button on:click|preventDefault={() => goto('/user')}>Cancel changes X</button>
+    <div class="buttonHolder">
+      <button type="submit">Update</button>
+    <button on:click|preventDefault={() => goto('/user')}>Cancel</button>
+    </div>
+    
   </form>
 </div>
   
@@ -98,15 +101,22 @@ import { onMount } from "svelte";
       border-style: none;
       padding: 5px;
       font-size: 1.1rem;;
-      width: 50%;
+      width: 40%;
       border-radius: 15px;
    margin-top: 30px;
-      font-family: 'La Belle Aurore', cursive;
+   font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
   }
 
 div {
   text-align: center;
  
+}
+
+.buttonHolder {
+  display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
   input {
@@ -121,6 +131,12 @@ div {
    font-size: 1rem;
    width: 50%;
   
+  }
+
+  label {
+    font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
+   font-size: 1rem;
   }
 
   .profile_picture {

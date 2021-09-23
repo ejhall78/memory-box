@@ -57,8 +57,7 @@
 	<div class="alreadySignedIn"><p>You are already signed in.</p><p class="linkToProfile"> Click <a href="/user">here</a> to be taken to your profile.</p></div>
 {:else}
 
-<h3>Create your Memory Box...</h3>
-  <p>Create an account to get started</p>
+
 
   <h3 class="title">Create your Memory Box...</h3>
   <p class="tagline">Create an account to get started</p>
@@ -172,7 +171,8 @@
       width: 50%;
       border-radius: 15px;
    margin-top: 30px;
-      font-family: 'La Belle Aurore', cursive;
+   font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
   }
   .alreadySignedIn {
     background-color: #2c9e97;
@@ -199,6 +199,8 @@
  label {
    text-align: center;
    font-size: 1.2rem;
+   font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
  }
 
 div {

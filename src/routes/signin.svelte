@@ -98,8 +98,8 @@
   
   }
   .inputName{
-    font-family: "La Belle Aurore", cursive;
-    font-weight: bold;
+    font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
     font-size: 1.2rem;
   }
   button {
@@ -107,12 +107,12 @@
       background-color: #2C9E97;
       border-style: none;
       padding: 5px;
-      font-size: 1.1rem;;
+      font-size: 1rem;;
       width: 50%;
       border-radius: 15px;
      margin-top: 30px;
-      font-family: 'La Belle Aurore', cursive;
-      font-weight: bold;
+     font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
       margin-bottom: 20px;
       
   }

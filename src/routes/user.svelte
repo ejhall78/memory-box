@@ -124,7 +124,8 @@
       font-size: 1.1rem;;
       width: 40%;
       border-radius: 15px;
-      font-family: 'La Belle Aurore', cursive;
+      font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
       margin-bottom: 30px;
     }
     p {

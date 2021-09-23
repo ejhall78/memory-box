@@ -51,8 +51,8 @@
         {#await highlightGetter(auth.currentUser.uid)}
             <p>Loading...</p>
         {:then data}
-            <h4>{data.question_title}</h4>
-            <p>On {data.date}, you answered...</p>
+            <h4 class="question">{data.question_title}</h4>
+            <p class="date">On {data.date}, you answered...</p>
             <p class="answerData">{data.body}</p>
         {:catch error}
             <p>Whoops! Something went wrong: {error.message}</p>
@@ -71,11 +71,40 @@
         padding: 5px;
         background-color: #42B7B0;
         border-radius: 10px;
-        font-family: 'La Belle Aurore', cursive;
+        font-family: 'Leckerli One', cursive;
+        font-weight: lighter;
+        
     }
     
-    .answerData{
+    .question {
+        font-family: 'La Belle Aurore', cursive;
+        font-weight: lighter;
+        margin-left: 10px;
+        margin-right: 10px;
+        
+    
+    }
+
+    .date {
+     font-size: 0.8rem;
+   
+    }
+
+
+  .answerData{
+      margin-top: 30px;
         background-color: white;
+        color:#2C9E97;
+        width: 80%;
+        height: auto;
+        text-align: center;
+        margin-left: 10%;
+        border-radius: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-family: 'La Belle Aurore', cursive;
+        font-weight: lighter;
+        font-size: 1.2rem;
     }
 
     button:hover{
@@ -96,6 +125,10 @@
       width: 30%;
       border-radius: 15px;
       font-family: 'La Belle Aurore', cursive;
+      margin-bottom: 10px;
+      font-family: 'Leckerli One', cursive;
+        font-weight: lighter;
+        
     }
 
 </style>
