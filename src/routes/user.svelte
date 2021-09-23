@@ -46,8 +46,9 @@
                     <ul>
                        
                         <li><span>Name:</span> <span class="details"> {userInfo.first_name} {userInfo.last_name}</span></li>
-                        <li><span>Email:</span> <span class="details">{auth.currentUser.email}</span></li>
+                       
                         <li><span>Birthday: </span><span class="details">{userInfo.date_of_birth}</span></li>    
+                        <li><span>Email:</span> <span class="details">{auth.currentUser.email}</span></li>
                     </ul>
                     
                     <!-- {Object.keys(userInfo)} {Object.values(userInfo)} -->
@@ -78,6 +79,7 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
+        margin-top: 10px;
         background-color: #2C9E97;
         border-radius: 100%;      
     }
@@ -88,6 +90,8 @@
         background-color: rgb(78, 179, 172);
         border-radius: 25px;
         text-align: center;
+        padding: 10px;
+        box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.2);
     }
 
    .userInfo {
