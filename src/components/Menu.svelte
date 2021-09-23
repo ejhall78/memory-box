@@ -6,7 +6,7 @@
         <li><a href="/signup">sign up</a></li>
         <li><a href="/memories">memories</a></li>
         <li><a href="/user">profile</a></li>
-        <li><a href="/friendlist">friend list</a></li>
+       
     </ul>
     
 </div>

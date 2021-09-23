@@ -133,13 +133,14 @@
 	{#if showList}
 		{#each ansList as answer}
 			{#if answer.forget}
-				<button on:click={() => showList = false}>Close</button>
+				<button class="closeButton" on:click={() => showList = false}>Close</button>
 				<p class="no-highlight">You have chosen to forget this memory</p>
 			{:else}
 				<button on:click={() => showList = false}>Close</button>
 				<div class="highlight">
-					<h4 class="highlight__title">Q: {answer.question_title}</h4>
-					<p class="highlight__info">On {answer.date}, you answered...</p>
+					<p class="highlight__date">On {answer.date}, you answered:</p>
+					<h4 class="highlight__title">{answer.question_title}</h4>
+
 					<p class="highlight__info">{answer.body}</p>
 				</div>
 			{/if}
@@ -156,6 +157,22 @@
 <style>
 
 	ul {list-style-type: none;}
+
+  button {
+		color: white;
+      background-color:#4FC5BD;
+      border-style: none;
+      padding: 2px;
+      font-size: 1.1rem;;
+      width: 30%;
+      border-radius: 15px;
+      margin-top: 15px;
+      font-family: 'Leckerli One', cursive;
+      font-weight: light;
+      margin-bottom: 20px;
+			margin: auto 35%;
+
+	}
 
 	/* Month header */
 	.month {
@@ -240,13 +257,13 @@
     font-weight: lighter;
 		box-shadow: inset 5px 5px rgb(231, 239, 240);
 	}
+	.days li.active {
+    background-color: rgb(0, 175, 152);
+		color: white
+    }
 
 	/* Highlight the "current" day */
-	.active {
-		padding: 5px;
-		background: #F2EB16;
-		color: white;
-	}
+
 	
 	.days li.has-answers {
 		color: #1D6468;
@@ -255,30 +272,39 @@
 	}
 
 	.highlight {
-    background-color: #4FC5BD;
-    padding: 20px;
-    font-family: 'La Belle Aurore', cursive;
+       text-align: center;
+        color: white;
+        margin: 20px;
+        padding: 5px 20px 20px 20px;
+        background-color: #42B7B0;
+        border-radius: 10px;
+        font-family: 'La Belle Aurore', cursive;
+  
     /* font-weight: bolder; */
     }
 
 		.highlight__title{
-    font-family: 'Leckerli One', cursive;
-    font-size: 1.5rem;
+			font-family: 'La Belle Aurore', cursive;
+    font-size: 1rem;
     font-weight: lighter;
   }
 
+	.highlight__date{
+		font-family: 'Leckerli One', cursive;
+    font-size: 0.8rem;
+    font-weight: lighter;
+	}
+
 	.highlight__info {
 		background-color: white;
-    font-family: 'La Belle Aurore', cursive;
-    font-weight: bold;
-    color: #2C9E97;
-    border-radius: 25px;
-    padding: 5px 0px 5px 20px;
-    border-style: none;
-    margin: 5px;
-   margin-left: 20px;
-   font-size: 1rem;
-   width: 50%;
+        color:#2C9E97;
+        width: 80%;
+        height: auto;
+        text-align: center;
+        margin-left: 10%;
+        border-radius: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
   
   }
 

@@ -52,7 +52,7 @@
         {#await highlightGetter(auth.currentUser.uid)}
             <p>Loading...</p>
         {:then data}
-            <h4>{data.question_title}</h4>
+            <h4 class="question">{data.question_title}</h4>
             <p>On {data.date}, you answered...</p>
             <p class="answerData">{data.body}</p>
         {:catch error}
@@ -72,11 +72,27 @@
         padding: 5px;
         background-color: #42B7B0;
         border-radius: 10px;
-        font-family: 'La Belle Aurore', cursive;
+        font-family: 'Leckerli One', cursive;
+        font-weight: lighter;
     }
+     
+    .question {
+        font-family: 'La Belle Aurore', cursive;
+        font-weight: lighter;
     
+    }
     .answerData{
         background-color: white;
+        color:#2C9E97;
+        width: 80%;
+        height: auto;
+        text-align: center;
+        margin-left: 10%;
+        border-radius: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-family: 'La Belle Aurore', cursive;
+        font-weight: lighter;
     }
 
     button:hover{
@@ -93,10 +109,10 @@
       background-color: #2C9E97;
       border-style: none;
       padding: 5px;
-      font-size: 1.1rem;;
+      font-size: 1rem;;
       width: 30%;
       border-radius: 15px;
-      font-family: 'La Belle Aurore', cursive;
+      font-family: 'Leckerli One', cursive;
     }
 
 </style>
