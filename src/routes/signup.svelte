@@ -63,7 +63,7 @@
   <p class="tagline">Create an account to get started</p>
 
   <form on:submit|preventDefault={submitHandler(values)}>
-    <div>
+    <div class="inputRow">
       <label for="first_name">First Name</label>
       <input
         id="first_name"
@@ -73,7 +73,7 @@
         bind:value={details.first_name}
       />
     </div>
-    <div>
+    <div class="inputRow">
       <label for="last_name">Last Name</label>
       <input
         id="last_name"
@@ -83,7 +83,7 @@
         bind:value={details.last_name}
       />
     </div>
-    <div>
+    <div class="inputRow">
       <label for="date_of_birth">Birthday</label>
       <input
         id="date_of_birth"
@@ -96,7 +96,7 @@
       />
     </div>
     <!-- pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}" -->
-    <div>
+    <div class="inputRow">
       <label for="email">Email</label>
       <input
         id="email"
@@ -115,7 +115,7 @@
         bind:value={values.username}
       />
     </div> -->
-    <div>
+    <div class="inputRow">
       <label for="password">Password</label>
       <input
         id="password"
@@ -142,7 +142,11 @@
     font-size: 1.5rem;
     font-weight: lighter;
   }
-
+  .inputRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   .tagline {
     color:rgb(182, 227, 230);
     font-size: 1.2rem;
@@ -201,6 +205,7 @@
    font-size: 1.2rem;
    font-family: 'Leckerli One', cursive;
    font-weight: lighter;
+   margin: 5px;
  }
 
 div {
