@@ -6,7 +6,6 @@ import {
   getDocs,
   doc,
   getDoc,
-
   updateDoc,
   arrayRemove,
   arrayUnion,
@@ -79,8 +78,9 @@ export const getTodaysQuestion = async (day) => {
   const docData = docSnap.data();
   const todaysQuestion = docData.original_set.filter(question => question['question_id'] === day);
   return todaysQuestion[0];
+};
 
-export const getAnswersByUser = async uid => {
+export const getAnswersByUser = async (uid) => {
   const docRef = doc(db, 'answers', uid);
   const docSnap = await getDoc(docRef);
   const answers = docSnap.data();
@@ -99,9 +99,9 @@ export const createAnsDaysRefObj = async (uid) => {
   // check each answers date
   // if date of answer already exists in formattedAnswers, push answer to that date array
   // else create an array with that dates key and push answer to that array
-  answers.forEach((answer) => {
+  answers.forEach(answer => {
     if (answer.date in formattedAnswers) {
-      answer.date.push(answer);
+      formattedAnswers[answer.date].push(answer);
     } else {
       formattedAnswers[answer.date] = [answer];
     }
