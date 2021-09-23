@@ -48,7 +48,7 @@
 
 	// *** db stuff ***
   
-	import { createAnsDaysRefObj, app, db, auth, getAnswersByDay } from "../lib/firebase"
+	import { createAnsDaysRefObj, app, db, auth } from "../lib/firebase"
 
 	let showList = false
 	let showEmptyMessage = false
