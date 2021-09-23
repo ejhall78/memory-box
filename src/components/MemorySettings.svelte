@@ -3,7 +3,6 @@
 
 import {auth, getAnswersByUser, deleteMemory, toggleMemoryForget } from '../lib/firebase'
 
-import {goto} from '$app/navigation'
 
 import {onMount} from 'svelte'
 
@@ -51,10 +50,13 @@ const forgetHandler = (answerArray, answer, uid, i) => {
  <ul>
 	{#each answers as answer, i}
 		<li class="memoryObject">
-			{answer.question_title}
-            {answer.body}
-            {answer.date}
+			<p class="date">{answer.date}</p>
+            <p class="question">{answer.question_title}</p>
+            <p class="answer">{answer.body}</p>
+            
+            <div class="buttonHolder">
             {#if answer.forget} 
+           
                 <button class="forgottenButton"
     on:click={()=> forgetHandler(answers,answer,auth.currentUser.uid, i)}
     >
@@ -67,8 +69,9 @@ const forgetHandler = (answerArray, answer, uid, i) => {
     Forget?
 </button>
 {/if}
-            <button on:click={() => submitHandler(answer, auth.currentUser.uid)}>Delete Memory (forever!)</button>
-		</li>
+            <button class="deleteButton" on:click={() => submitHandler(answer, auth.currentUser.uid)}>Delete</button>
+		</div>
+    </li>
 	{/each}
 </ul>
 
@@ -78,11 +81,36 @@ const forgetHandler = (answerArray, answer, uid, i) => {
 </div>
 
 <style>
+.question {
+    font-size: 1.2rem;
+    padding: 0px 5px;
+}
+    .date {
+        text-align: right;
+        padding-right: 5px;
+        font-family: 'Leckerli One', cursive;
+        font-size: 0.85rem;
+    }
+    .answer {
+        background-color: white;
+        color:#2C9E97;
+        width: 80%;
+        height: auto;
+        text-align: center;
+        margin-left: 10%;
+        border-radius: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+    }
     .memoryObject {
-        border: 5px solid seagreen;
-        padding: 2px;
-        margin: 2px;
-        color:brown
+       text-align: center;
+        color: white;
+        margin: 20px;
+        padding: 5px 20px 20px 20px;
+        background-color: #42B7B0;
+        border-radius: 10px;
+        font-family: 'La Belle Aurore', cursive;
     }
     .forgetButton{
         border-radius: 25px;
@@ -90,7 +118,12 @@ const forgetHandler = (answerArray, answer, uid, i) => {
         color:rgb(255, 255, 255);
         background-color: rgb(158, 160, 159);
         font-family: 'Leckerli One', cursive;
-       display: flex;
+       padding: 5px;
+      font-size: 1.1rem;;
+      width: 40%;
+      border-radius: 15px;
+      margin-top: 15px;
+      margin-bottom: 20px;
     }
     .forgottenButton{
         border-radius: 25px;
@@ -98,6 +131,50 @@ const forgetHandler = (answerArray, answer, uid, i) => {
         color:rgb(255, 255, 255);
         background-color: rgb(50, 173, 112);
         font-family: 'Leckerli One', cursive;
-       display: flex;
+        padding: 5px;
+      font-size: 1.1rem;;
+      width: 40%;
+      border-radius: 15px;
+      margin-top: 15px;
+      margin-bottom: 20px;
+       
     }
+    .deleteButton {
+    color: white;
+      background-color: #2C9E97;
+      border-style: none;
+      padding: 5px;
+      font-size: 1.1rem;;
+      width: 40%;
+      border-radius: 15px;
+      margin-top: 15px;
+      font-family: 'Leckerli One', cursive;
+      font-weight: light;
+      margin-bottom: 20px;
+      
+  }
+
+
+
+.deleteButton:active {
+    box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.2);
+    background-color: rgb(184, 86, 94);
+}
+.buttonHolder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ h1 {
+     text-align: center;
+     font-family: 'Leckerli One', cursive;
+     font-weight: lighter;
+ }   
 </style>
