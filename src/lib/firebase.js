@@ -6,12 +6,11 @@ import {
   getDocs,
   doc,
   getDoc,
-
   updateDoc,
   arrayRemove,
   arrayUnion,
   query,
-  where
+  where,
 } from "@firebase/firestore/lite";
 
 const apiKey = import.meta.env.VITE_KEY;
@@ -57,31 +56,32 @@ export const getUserInfo = async (uid) => {
   return docData;
 };
 
-
-
 export const getAnswers = async (uid) => {
-  const docRef = doc(db, 'answers', uid);
+  const docRef = doc(db, "answers", uid);
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  return docData
+  return docData;
 };
 
 export const getQuestions = async () => {
-  const docRef = doc(db, 'questions', 'question_sets');
+  const docRef = doc(db, "questions", "question_sets");
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
   return docData;
 };
 
 export const getTodaysQuestion = async (day) => {
-  const docRef = doc(db, 'questions', 'question_sets');
+  const docRef = doc(db, "questions", "question_sets");
   const docSnap = await getDoc(docRef);
   const docData = docSnap.data();
-  const todaysQuestion = docData.original_set.filter(question => question['question_id'] === day);
+  const todaysQuestion = docData.original_set.filter(
+    (question) => question["question_id"] === day
+  );
   return todaysQuestion[0];
+};
 
-export const getAnswersByUser = async uid => {
-  const docRef = doc(db, 'answers', uid);
+export const getAnswersByUser = async (uid) => {
+  const docRef = doc(db, "answers", uid);
   const docSnap = await getDoc(docRef);
   const answers = docSnap.data();
   return answers.original_set;
@@ -101,7 +101,7 @@ export const createAnsDaysRefObj = async (uid) => {
   // else create an array with that dates key and push answer to that array
   answers.forEach((answer) => {
     if (answer.date in formattedAnswers) {
-      answer.date.push(answer);
+      formattedAnswers[answer.date].push(answer);
     } else {
       formattedAnswers[answer.date] = [answer];
     }
