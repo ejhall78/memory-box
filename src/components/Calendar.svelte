@@ -60,6 +60,7 @@
 		if (!ansByDay) {
 			// display message saying no answers for this day
 			showEmptyMessage = true
+			showList = false
 		}
 
 		else {
@@ -67,6 +68,7 @@
 			// assign ansList to current day
 			// loop through ansList ans show each answer for a given day (in html below)
 			showList = true
+			showEmptyMessage = false
 			ansList = ansByDay
 			console.log(ansList);
 		}
