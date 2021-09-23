@@ -28,8 +28,8 @@ const submitHandler = (answer, uid) => {
             });
     console.log('refreshed') }
 
-const forgetHandler = (answers, answer, uid, i) => {
-        toggleMemoryForget(answers, answer, uid, i).then(() => {
+const forgetHandler = (answerArray, answer, uid, i) => {
+        toggleMemoryForget(answerArray, answer, uid, i).then(() => {
                 console.log('memory forgotten')
                 return getAnswersByUser(uid)
             }).then((newAnswers) => { 

@@ -41,7 +41,7 @@
             const randomSelector = Math.floor(
                 Math.random() * highlightCount + 1
             );
-            return highlights.original_set[randomSelector];
+            return filteredHighlights[randomSelector];
         });
     };
 </script>
