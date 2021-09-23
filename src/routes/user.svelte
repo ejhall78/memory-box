@@ -45,15 +45,15 @@
                    
                     <ul>
                        
-                        <li><span>Name:</span> <span class="details"> {userInfo.first_name} {userInfo.last_name}</span></li>
+                        <li><span class="detailName">Name:</span> <span class="details"> {userInfo.first_name} {userInfo.last_name}</span></li>
                        
-                        <li><span>Birthday: </span><span class="details">{userInfo.date_of_birth}</span></li>    
-                        <li><span>Email:</span> <span class="details">{auth.currentUser.email}</span></li>
+                        <li><span class="detailName">Birthday: </span><span class="details">{userInfo.date_of_birth}</span></li>    
+                        <li><span class="detailName">Email:</span> <span class="details">{auth.currentUser.email}</span></li>
                     </ul>
                     
                     <!-- {Object.keys(userInfo)} {Object.values(userInfo)} -->
                    <p><button class="signOutButton" on:click={logout}>Sign Out</button>
-                    <button class="editProfile" on:click={()=> goto("/editprofile")}>edit profile</button>
+                    <button class="editProfile" on:click={()=> goto("/editprofile")}>Edit Profile</button>
                 </p> 
               
                 {:else}
@@ -69,9 +69,10 @@
 
 <style>
     .profile {
-        background-color: #4FC5BD;
-        font-family: 'La Belle Aurore', cursive;
-        text-align: center;
+    background-color: #4FC5BD;
+    font-family: 'La Belle Aurore', cursive;
+    text-align: center;
+    margin-top: 10px;
 
     }
 
@@ -81,7 +82,12 @@
         flex-direction: column;
         margin-top: 10px;
         background-color: #2C9E97;
-        border-radius: 100%;      
+        border-radius: 100%;  
+        width: 90%;
+        display: flex;
+    justify-content: center;
+    margin: auto;
+  
     }
 
 
@@ -98,6 +104,7 @@
        
        font-size: 1.2rem;
        text-align: center;
+       
    }
     .profile_picture {
         border-radius: 100%;
@@ -139,13 +146,24 @@
    
     li {
         padding: 5px;
+        display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     }
 
     .details{
         color: #2C9E97;
         background-color: white;
+        width: 60%;
        
         padding: 0px 10px 0px 10px;
         border-radius: 25px;
+   
+    }
+
+    .detailName {
+        font-family: 'Leckerli One', cursive;
+   font-weight: lighter;
+   margin-left: 20px
     }
 </style>

@@ -39,24 +39,26 @@
 	 <section class="signInSection">
         <h3>Open your Memory Box...</h3>
         <form on:submit|preventDefault={submitHandler(values)}>
-        <div class="inputName">
-            <label for="email">Email</label>
-            <input 
-                id="email"
-                type="email"
-                placeholder="name@email.com"
-                bind:value={values.email}
-            />
-        </div>
-        <div class="inputName"> 
-            <label for="password">Password</label>
-            <input 
-                id="password"
-                type="password"
-                placeholder="*******"
-                bind:value={values.password}
-            />
-        </div>
+ <div class="inputSection">
+    <div class="inputName">
+        <label for="email">Email</label>
+        <input 
+            id="email"
+            type="email"
+            placeholder="name@email.com"
+            bind:value={values.email}
+        />
+    </div>
+    <div class="inputName"> 
+        <label for="password">Password</label>
+        <input 
+            id="password"
+            type="password"
+            placeholder="*******"
+            bind:value={values.password}
+        />
+    </div
+    ></div> 
         <div>
             <button type='submit'>Sign in</button>
         </div>
@@ -81,9 +83,16 @@
     font-weight: lighter;
     font-size: 1.5rem;
     }
+    .inputSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    }
 
     h3{ 
     font-weight: lighter;}
+
+
     
     input {
     font-family: 'La Belle Aurore', cursive;
@@ -91,7 +100,7 @@
     border-radius: 25px;
     padding: 5px 0px 5px 20px;
     border-style: none;
-    margin: 5px;
+  
    margin-left: 20px;
    font-size: 1rem;
    width: 50%;
@@ -101,6 +110,11 @@
     font-family: 'Leckerli One', cursive;
    font-weight: lighter;
     font-size: 1.2rem;
+      display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 0px;
+
   }
   button {
     color: white;
@@ -145,6 +159,16 @@ button:active {
     .signUp {
         font-family: 'La Belle Aurore', cursive;
         font-size: 1rem;
+    
+    }
+
+    a:visited {
+        color:rgb(7, 83, 77);
+        text-decoration: none;
+    }
+    
+    a{ 
+        color: white;
     }
 
 </style>

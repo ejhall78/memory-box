@@ -76,11 +76,19 @@ const forgetHandler = (answerArray, answer, uid, i) => {
 </ul>
 
 {:else}
-	Please <a href='/signin'>Log In</a>
+	Please <a class="signinlink"href='/signin'>Log In</a>
 {/if}
 </div>
 
 <style>
+  
+  a:visited {
+        color:rgb(7, 83, 77) ;
+        text-decoration: none ;
+  }
+    a{ 
+        color: white;
+    }
 .question {
     font-size: 1.2rem;
     padding: 0px 5px;
@@ -177,4 +185,6 @@ ul {
      font-family: 'Leckerli One', cursive;
      font-weight: lighter;
  }   
+
+ 
 </style>

@@ -225,4 +225,14 @@ div {
   ::placeholder {
     color:rgb(181, 219, 219);
   }
+
+  a:visited {
+        color:rgb(7, 83, 77);
+        text-decoration: none;
+    }
+    
+    a{ 
+        color: white;
+    }
+  
 </style>

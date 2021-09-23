@@ -46,7 +46,7 @@
 </script>
 
 <div class="singleHighlight">
-    <h4>Today's Memory</h4>
+    <h4 class="title">Today's Memory</h4>
     {#if showHighlight}
         {#await highlightGetter(auth.currentUser.uid)}
             <p>Loading...</p>
@@ -64,6 +64,10 @@
 </div>
 
 <style>
+
+.title {
+    font-weight: lighter;
+}
     .singleHighlight {
         text-align: center;
         color: white;
@@ -81,18 +85,21 @@
         font-weight: lighter;
         margin-left: 10px;
         margin-right: 10px;
+        font-size: 1.2rem;
         
     
     }
 
     .date {
      font-size: 0.8rem;
-   
+     margin-bottom: 0;
+     color:rgb(183, 233, 229)
+     
     }
 
 
   .answerData{
-      margin-top: 30px;
+      
         background-color: white;
         color:#2C9E97;
         width: 80%;
@@ -103,7 +110,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
         font-family: 'La Belle Aurore', cursive;
-        font-weight: lighter;
+        margin-top: 10px;
         font-size: 1.2rem;
     }
 
