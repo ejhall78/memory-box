@@ -8,3 +8,7 @@ Tech Used:
 Svelte & SvelteKit | Firebase Auth | Firestore | TypeScript & JavaScript | Node.js | HTML | CSS
 
 You can find the full presentation on the Northcoders YouTube channel at https://www.youtube.com/watch?v=mE5hv9FEevk
+
+
+https://user-images.githubusercontent.com/77503450/136941513-c02a9446-69f7-4520-98ec-5088d94faad4.mp4
+
