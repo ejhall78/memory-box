@@ -9,5 +9,5 @@ Svelte & SvelteKit | Firebase Auth | Firestore | TypeScript & JavaScript | Node.
 
 You can find the full presentation on the Northcoders YouTube channel at https://www.youtube.com/watch?v=mE5hv9FEevk
 
-https://user-images.githubusercontent.com/77503450/136941703-33ad5a3b-6d3d-45ee-b972-b5c8d2d3682d.mp4
+https://user-images.githubusercontent.com/77503450/137102078-45b861b8-a65d-4e49-b064-a826ead1cab1.mp4
 
